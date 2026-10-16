@@ -1,0 +1,323 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Background Job Progress Modal Styles */
+.background-job-modal {
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.background-job-modal .modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.background-job-modal .modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.background-job-modal .close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.background-job-modal .close-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.background-job-modal .modal-body {
+  padding: 1.5rem;
+}
+
+.progress-section {
+  margin-bottom: 2rem;
+}
+
+.progress-section h3 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #8BC34A);
+  transition: width 0.3s ease;
+  border-radius: 10px;
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  color: #666;
+}
+
+.milestones {
+  margin-bottom: 1.5rem;
+}
+
+.milestones h4 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.milestone-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.milestone {
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.milestone.achieved {
+  border-color: #4CAF50;
+  background-color: #f8fff8;
+}
+
+.milestone.pending {
+  border-color: #e0e0e0;
+  background-color: #f9f9f9;
+}
+
+.milestone-percentage {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.milestone-status {
+  font-size: 1.5rem;
+}
+
+.estimated-completion {
+  background-color: #f0f8ff;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #2196F3;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.status-message {
+  background-color: #fff3cd;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #ffc107;
+  margin-bottom: 1.5rem;
+}
+
+.status-message p {
+  margin: 0;
+  color: #856404;
+  font-weight: 500;
+}
+
+.immediate-results {
+  background-color: #e8f5e8;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #4CAF50;
+  text-align: center;
+}
+
+.immediate-results h3 {
+  color: #2e7d32;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.immediate-results p {
+  color: #388e3c;
+  margin-bottom: 1rem;
+}
+
+.view-results-button {
+  background: linear-gradient(135deg, #4CAF50, #8BC34A);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.view-results-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.background-job-modal .modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e0e0e0;
+  text-align: right;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .background-job-modal {
+    width: 95%;
+    margin: 2.5vh auto;
+  }
+  
+  .milestone-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  
+  .progress-stats {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+}
+
+/* Migration Step Indicator */
+.migration-step {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+/* Hybrid Migration Info */
+.hybrid-info {
+  background-color: #e3f2fd;
+  border: 1px solid #2196F3;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.hybrid-info h4 {
+  color: #1976d2;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.hybrid-info p {
+  color: #1565c0;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Refresh Button */
+.refresh-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.refresh-button:hover {
+  background-color: #218838;
+}
+
+/* Global table row number column width control */
+/* Make the first column (row numbers) narrow in all tables */
+
+/* Row-number column: scope to known table classes only (global table:first-child broke Source data format, etc.) */
+/* Specific targeting for common table classes */
+.editable-table th:first-child,
+.editable-table td:first-child,
+.results-table th:first-child,
+.results-table td:first-child,
+.dashboard-table th:first-child,
+.dashboard-table td:first-child,
+.flows-table th:first-child,
+.flows-table td:first-child {
+  width: 60px !important;
+  min-width: 60px !important;
+  max-width: 60px !important;
+  text-align: center;
+}
+
+/* Override for tables that need different first column widths */
+.editable-table th:nth-child(1):not(:first-child),
+.editable-table td:nth-child(1):not(:first-child) {
+  width: auto !important;
+  min-width: auto !important;
+  max-width: none !important;
+}

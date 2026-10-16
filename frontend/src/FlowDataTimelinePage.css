@@ -1,0 +1,177 @@
+/**
+ * Data timeline table — visual patterns aligned with InlineDataPreview (card, toolbar, sticky header).
+ * Scoped to this page only; does not import InlineDataPreview component.
+ */
+
+.flow-timeline-preview-card {
+  margin: 0 0 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.flow-timeline-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.flow-timeline-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.flow-timeline-card-title-icon {
+  font-size: 18px;
+  color: #4b5563;
+}
+
+.flow-timeline-card-count {
+  color: #6b7280;
+  font-weight: normal;
+}
+
+.flow-timeline-card-body {
+  padding: 0;
+}
+
+.flow-timeline-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.flow-timeline-search-icon {
+  flex-shrink: 0;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.flow-timeline-search-input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #374151;
+  background: #ffffff;
+}
+
+.flow-timeline-search-input::placeholder {
+  color: #9ca3af;
+}
+
+.flow-timeline-search-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.flow-timeline-table-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-height: min(560px, calc(100vh - 280px));
+  border-top: none;
+  overflow: hidden;
+}
+
+.flow-timeline-table-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+.flow-timeline-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.flow-timeline-table thead {
+  position: sticky;
+  top: 0;
+  background: #f9fafb;
+  z-index: 2;
+  box-shadow: 0 1px 0 #e5e7eb;
+}
+
+.flow-timeline-table th {
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.flow-timeline-table td {
+  padding: 10px 12px;
+  color: #1f2937;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: middle;
+}
+
+.flow-timeline-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.flow-timeline-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.flow-timeline-empty {
+  padding: 1.5rem;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.flow-timeline-status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.flow-timeline-status--success {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.flow-timeline-status--failed {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.flow-timeline-status--running {
+  background: #fffbeb;
+  color: #b45309;
+}
+
+.flow-timeline-status--neutral {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.flow-timeline-table .view-link {
+  font-weight: 500;
+}
+
+.flow-timeline-no-change {
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 500;
+}

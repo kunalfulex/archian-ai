@@ -1,0 +1,1 @@
+"""Per-connector metadata adapters."""

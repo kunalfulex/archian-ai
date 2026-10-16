@@ -1,0 +1,21 @@
+# SSL Certificates (local development)
+certs/
+
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+nohup.out
+
+# Generated export files (one-time download); keep exports/ folder via .gitkeep
+exports/*.xlsx
+exports/*.csv
+
+newsletter_emails.json
+# Python packaging
+*.egg-info/

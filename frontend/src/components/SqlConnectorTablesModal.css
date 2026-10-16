@@ -1,0 +1,221 @@
+.sql-tables-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  z-index: 10050;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: max(16px, env(safe-area-inset-top, 0px)) 16px max(16px, env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-sizing: border-box;
+}
+
+.sql-tables-modal {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  max-width: min(560px, 100%);
+  width: 100%;
+  margin: auto;
+  min-height: 0;
+  max-height: min(calc(100vh - 32px), 720px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-align: left;
+}
+
+.sql-tables-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.sql-tables-modal-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.sql-tables-modal-sub {
+  margin: 6px 0 0;
+  font-size: 0.8125rem;
+  color: #6b7280;
+}
+
+.sql-tables-modal-close {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #f3f4f6;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #4b5563;
+}
+
+.sql-tables-modal-close:hover {
+  background: #e5e7eb;
+}
+
+.sql-tables-modal-body {
+  padding: 12px 18px 16px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sql-tables-back-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #2563eb;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-bottom: 4px;
+  align-self: flex-start;
+}
+
+.sql-tables-back-btn:hover {
+  color: #1d4ed8;
+}
+
+.sql-tables-search {
+  width: 100%;
+  padding: 8px 10px 8px 34px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+}
+
+.sql-tables-search-wrap {
+  position: relative;
+}
+
+.sql-tables-search-wrap svg {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.sql-tables-table-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fafafa;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sql-tables-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  table-layout: fixed;
+  text-align: left;
+}
+
+.sql-tables-table th,
+.sql-tables-table td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle;
+}
+
+.sql-tables-table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+.sql-tables-table th:first-child,
+.sql-tables-table td:first-child {
+  width: 78%;
+  text-align: left;
+  word-break: break-word;
+}
+
+.sql-tables-table th:last-child,
+.sql-tables-table td:last-child {
+  width: 22%;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.sql-tables-table tbody tr:hover td {
+  background: #f0f9ff;
+}
+
+.sql-tables-btn-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #2563eb;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.sql-tables-btn-link:hover {
+  color: #1d4ed8;
+}
+
+.sql-tables-fields-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.sql-tables-fields-table th:first-child,
+.sql-tables-fields-table td:first-child {
+  width: 78%;
+}
+
+.sql-tables-fields-table th:last-child,
+.sql-tables-fields-table td:last-child {
+  width: 22%;
+  text-align: left;
+  white-space: normal;
+}
+
+.sql-tables-fields-table td:first-child {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.sql-tables-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+.sql-tables-loading,
+.sql-tables-error {
+  font-size: 0.875rem;
+  padding: 8px 0;
+}
+
+.sql-tables-error {
+  color: #b91c1c;
+}

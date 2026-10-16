@@ -1,0 +1,246 @@
+/* src/pages/LoginPage.css */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #f6f9fc;
+  color: #1f2937;
+}
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.login-container {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.icon-container {
+  margin-bottom: 20px;
+}
+
+.icon-container img {
+  width: 60px;
+  height: 60px;
+}
+
+.login-container h3.archian-brand-title {
+  margin-bottom: 20px;
+  margin-top: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  background: linear-gradient(to right, #3b82f6, #1d4ed8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Google Login Button */
+.google-login-button {
+  width: 100%;
+  padding: 12px 16px;
+  background: white;
+  color: #333;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-login-button:hover {
+  border-color: #d1d5d9;
+  background: #f8f9fa;
+}
+
+.google-button-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.google-icon {
+  display: flex;
+  align-items: center;
+}
+
+/* Separator */
+.separator {
+  position: relative;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.separator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: calc(50% - 30px);
+  height: 1px;
+  background: #e1e5e9;
+}
+
+.separator::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: calc(50% - 30px);
+  height: 1px;
+  background: #e1e5e9;
+}
+
+.separator span {
+  background: white;
+  padding: 0 15px;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+/* Password field container and toggle button */
+.password-field-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 0;
+  bottom: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 8px;
+  color: #6b7280;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.password-toggle-btn:hover {
+  color: #374151;
+}
+
+.password-toggle-btn:focus {
+  outline: none;
+  color: #667eea;
+}
+
+.forgot-password-link {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.forgot-password-link a {
+  color: #667eea;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.forgot-password-link a:hover {
+  color: #5a6fd8;
+  text-decoration: underline;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 14px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.submit-button:hover:not(:disabled) {
+  background: #5a6fd8;
+}
+
+.submit-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #e74c3c;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #fdf2f2;
+  border-radius: 6px;
+  border: 1px solid #fecaca;
+}
+
+.signup-link {
+  margin-top: 20px;
+  color: #666;
+}
+
+.signup-link a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+.turnstile-container {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0;
+  min-height: 65px;
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 30px 20px;
+  }
+}

@@ -1,0 +1,91 @@
+.planner-clarification-panel {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.planner-clarification-prompt {
+  margin: 0 0 10px;
+  font-weight: 600;
+  color: #1a202c;
+  font-size: 0.95rem;
+}
+
+.planner-clarification-context {
+  margin: 0 0 8px;
+  font-size: 0.88rem;
+  color: #4a5568;
+  line-height: 1.4;
+}
+
+.planner-clarification-hint {
+  margin: 10px 0 0;
+  font-size: 0.85rem;
+  color: #4a5568;
+  line-height: 1.45;
+}
+
+.planner-clarification-option--create {
+  border-style: dashed;
+}
+
+.planner-clarification-block + .planner-clarification-block {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.planner-clarification-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.planner-clarification-option {
+  text-align: left;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  background: #fff;
+  color: #2d3748;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.planner-clarification-option:hover:not(:disabled) {
+  border-color: #6366f1;
+}
+
+.planner-clarification-option.selected {
+  border-color: #6366f1;
+  background: #eef2ff;
+}
+
+.planner-clarification-option:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.planner-clarification-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+.planner-clarification-continue {
+  padding: 8px 16px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.planner-clarification-continue:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

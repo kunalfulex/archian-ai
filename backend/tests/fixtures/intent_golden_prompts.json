@@ -1,0 +1,109 @@
+[
+  {
+    "id": "extract_only_sql",
+    "prompt": "extract user data from my database",
+    "description": "Extract-only; no destination named",
+    "expect": {
+      "turn_type": "extract",
+      "needs_destination": "none",
+      "destination_type": "unknown"
+    }
+  },
+  {
+    "id": "extract_explicit_fields_sql",
+    "prompt": "extract first name, last name and email from user table from Test DB database",
+    "description": "Explicit columns + table + SQL connector name",
+    "expect": {
+      "turn_type": "extract",
+      "field_scope": "explicit"
+    }
+  },
+  {
+    "id": "migrate_sql_to_sf",
+    "prompt": "deploy user data from user table of Test DB to contact object in SF Prod",
+    "description": "Cross-system migrate with named destination",
+    "expect": {
+      "needs_destination": "required"
+    }
+  },
+  {
+    "id": "general_greeting",
+    "prompt": "hi there",
+    "description": "General conversational turn",
+    "expect": {
+      "turn_type": "general",
+      "needs_destination": "none"
+    }
+  },
+  {
+    "id": "vague_user_data",
+    "prompt": "deploy general user data from user table of Test DB application",
+    "description": "Vague field scope; should stay vague when S08 runs",
+    "expect": {
+      "field_scope": "vague"
+    }
+  },
+  {
+    "id": "continuation_map",
+    "prompt": "start mapping",
+    "description": "Continuation after extract; inherits session",
+    "continuation": true,
+    "expect": {
+      "turn_type": "map",
+      "needs_destination": "inherit_session"
+    }
+  },
+  {
+    "id": "multi_source_extract",
+    "prompt": "extract contacts from SF Prod and users from Test DB",
+    "description": "Multi-source extract routes to data_ops",
+    "expect": {
+      "turn_type": "data_ops",
+      "operations_include": "extract"
+    }
+  },
+  {
+    "id": "metadata_deploy_sf",
+    "prompt": "deploy custom fields to SF Prod",
+    "description": "Salesforce metadata deploy turn",
+    "expect": {
+      "turn_type": "metadata_deploy"
+    }
+  },
+  {
+    "id": "gsheets_join",
+    "prompt": "join Sheet1 and Sheet2 in my workbook",
+    "description": "Google Sheets join intent",
+    "expect": {
+      "turn_type": "extract",
+      "operations_include": "join"
+    }
+  },
+  {
+    "id": "test_db_users_table",
+    "prompt": "extract from user table in Test DB",
+    "description": "SQL table entity from migration intent",
+    "expect": {
+      "turn_type": "extract",
+      "source_entity_key": "users"
+    }
+  },
+  {
+    "id": "extract_create_sheet",
+    "prompt": "extract contacts from SF Prod and create a new google sheet",
+    "description": "Cross-system export needs destination",
+    "expect": {
+      "turn_type": "extract",
+      "needs_destination": "required"
+    }
+  },
+  {
+    "id": "sf_to_sf_migrate",
+    "prompt": "migrate contacts from SF Prod to SF Sandbox",
+    "description": "Same-system cross-org migrate",
+    "expect": {
+      "needs_destination": "required",
+      "turn_type": "migrate"
+    }
+  }
+]

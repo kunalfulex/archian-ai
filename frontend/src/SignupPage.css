@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+.signup-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.signup-container {
+  background: white;
+  padding: 20px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.icon-container {
+  margin-bottom: 8px;
+}
+
+.icon-container img {
+  width: 36px;
+  height: 36px;
+}
+
+.signup-container h2.archian-brand-title {
+  margin-bottom: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  background: linear-gradient(to right, #3b82f6, #1d4ed8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Google Button Styles */
+.google-login-button {
+  width: 100%;
+  padding: 8px 12px;
+  background: white;
+  color: #333;
+  border: 1px solid #e1e5e9;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-login-button:hover {
+  border-color: #4285F4;
+  box-shadow: 0 2px 8px rgba(66, 133, 244, 0.2);
+}
+
+.google-button-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.google-icon {
+  display: flex;
+  align-items: center;
+}
+
+.separator {
+  position: relative;
+  text-align: center;
+  margin: 18px 0px 8px;
+}
+
+.separator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: calc(50% - 30px);
+  height: 1px;
+  background: #e1e5e9;
+}
+
+.separator::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: calc(50% - 30px);
+  height: 1px;
+  background: #e1e5e9;
+}
+
+.separator span {
+  background: white;
+  padding: 0 15px;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 0px;
+}
+
+.form-row .input-field {
+  flex: 1;
+}
+
+.input-field {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #e1e5e9;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+/* Password field container and toggle button */
+.password-field-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 0;
+  bottom: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 8px;
+  color: #6b7280;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.password-toggle-btn:hover {
+  color: #374151;
+}
+
+.password-toggle-btn:focus {
+  outline: none;
+  color: #667eea;
+}
+
+/* Password Requirements Display */
+.password-requirements {
+  margin-bottom: 8px;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+
+
+.requirements-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.requirement {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+}
+
+.requirement.met {
+  color: #059669;
+}
+
+.requirement.unmet {
+  color: #9ca3af;
+}
+
+.requirement-icon {
+  font-size: 11px;
+  min-width: 14px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 12px;
+}
+
+.submit-button:hover:not(:disabled) {
+  background: #5a6fd8;
+}
+
+.submit-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #e74c3c;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #fdf2f2;
+  border-radius: 6px;
+  border: 1px solid #fecaca;
+}
+
+.success-message {
+  color: #27ae60;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #f0fdf4;
+  border-radius: 6px;
+  border: 1px solid #bbf7d0;
+}
+
+.password-strength {
+  text-align: left;
+  font-size: 12px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.password-strength.weak {
+  color: #e74c3c;
+  background: #fdf2f2;
+  border: 1px solid #fecaca;
+}
+
+.password-strength.medium {
+  color: #f39c12;
+  background: #fef9e7;
+  border: 1px solid #fde68a;
+}
+
+.password-strength.strong {
+  color: #27ae60;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.strength-text {
+  font-weight: 600;
+}
+
+.turnstile-container {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0;
+  min-height: 65px;
+}
+
+.login-link {
+  margin-top: 20px;
+  color: #666;
+}
+
+.login-link a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .signup-container {
+    padding: 30px 20px;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}

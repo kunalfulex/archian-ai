@@ -1,0 +1,72 @@
+.sql-tables-inline {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sql-tables-inline .gs-spreadsheets-toolbar {
+  flex-shrink: 0;
+}
+
+.sql-tables-inline .sql-tables-back-btn {
+  flex-shrink: 0;
+}
+
+.sql-tables-inline-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.sql-tables-inline-body .gs-spreadsheets-filter-hint,
+.sql-tables-inline-body .gs-spreadsheets-empty,
+.sql-tables-inline-body .sql-tables-loading,
+.sql-tables-inline-body .sql-tables-error {
+  flex-shrink: 0;
+}
+
+.gs-config-top-row .sql-tables-card.gs-spreadsheets-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.gs-config-top-row.sql-config-top-row {
+  align-items: flex-start;
+}
+
+.gs-config-top-row .sql-tables-inline .sql-tables-table-wrap {
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gs-config-top-row .sql-tables-inline .sql-tables-table-wrap::-webkit-scrollbar {
+  width: 6px;
+}
+
+.gs-config-top-row .sql-tables-inline .sql-tables-table-wrap::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.gs-config-top-row .sql-tables-inline .sql-tables-back-btn {
+  margin-bottom: 4px;
+}
+
+.gs-config-top-row .sql-tables-inline .sql-tables-loading {
+  margin: 0;
+  font-size: var(--gs-type-value, 0.875rem);
+  color: #64748b;
+}

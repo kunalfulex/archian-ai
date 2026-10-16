@@ -1,0 +1,102 @@
+.planner-plan-panel {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border: 1px solid #dbeafe;
+  border-radius: 8px;
+  background: #eff6ff;
+}
+
+.planner-plan-title {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e3a5f;
+}
+
+.planner-plan-destination {
+  margin: 0 0 10px;
+  font-size: 0.92rem;
+  color: #1e3a5f;
+  line-height: 1.45;
+}
+
+.planner-plan-destination-label {
+  font-weight: 600;
+}
+
+.planner-plan-goal {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  color: #1e3a5f;
+  line-height: 1.45;
+}
+
+.planner-plan-steps {
+  margin: 0 0 12px;
+  padding-left: 1.25rem;
+  color: #1a202c;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.planner-plan-step--schema {
+  margin-bottom: 4px;
+}
+
+.planner-plan-step-badge {
+  margin-left: 8px;
+  padding: 2px 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #92400e;
+  background: #fef3c7;
+  border-radius: 4px;
+}
+
+.planner-plan-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.planner-plan-secondary {
+  display: inline-block;
+  padding: 8px 14px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1e3a5f;
+  background: #fff;
+  border: 1px solid #93c5fd;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.planner-plan-secondary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.planner-plan-run {
+  display: inline-block;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #fff;
+  background: #2563eb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.planner-plan-run:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.planner-plan-run:not(:disabled):hover {
+  background: #1d4ed8;
+}

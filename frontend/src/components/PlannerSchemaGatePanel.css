@@ -1,0 +1,68 @@
+.planner-schema-gate-panel {
+  margin-top: 10px;
+  padding: 12px 14px;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  background: #fffbeb;
+}
+
+.planner-schema-gate-title {
+  margin: 0 0 8px;
+  font-weight: 600;
+  color: #92400e;
+}
+
+.planner-schema-gate-summary {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #78350f;
+}
+
+.planner-schema-gate-fields {
+  margin: 0 0 12px;
+  padding-left: 1.2rem;
+  font-size: 0.85rem;
+  color: #1a202c;
+}
+
+.planner-schema-gate-more {
+  color: #6b7280;
+  font-style: italic;
+}
+
+.planner-schema-gate-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.planner-schema-gate-deploy {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  background: #059669;
+  color: #fff;
+  cursor: pointer;
+}
+
+.planner-schema-gate-deploy:hover {
+  background: #047857;
+}
+
+.planner-schema-gate-dismiss {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid #d97706;
+  border-radius: 6px;
+  background: transparent;
+  color: #92400e;
+  cursor: pointer;
+}
+
+.planner-schema-gate-dismiss:hover {
+  background: #fef3c7;
+}

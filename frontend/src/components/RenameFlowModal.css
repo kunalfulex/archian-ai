@@ -1,0 +1,144 @@
+.rename-flow-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.rename-flow-modal {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  max-width: 440px;
+  width: 100%;
+  animation: renameFlowModalIn 0.25s ease-out;
+}
+
+@keyframes renameFlowModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.rename-flow-modal-header {
+  display: flex;
+  align-items: center;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.rename-flow-modal-icon {
+  color: #4f46e5;
+  margin-right: 10px;
+  font-size: 22px;
+  display: flex;
+}
+
+.rename-flow-modal-header h2 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  flex: 1;
+}
+
+.rename-flow-modal-close {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.rename-flow-modal-close:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.rename-flow-modal-content {
+  padding: 20px;
+}
+
+.rename-flow-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.rename-flow-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #1f2937;
+}
+
+.rename-flow-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.rename-flow-input:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.rename-flow-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.rename-flow-cancel,
+.rename-flow-save {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+
+.rename-flow-cancel {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.rename-flow-cancel:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+.rename-flow-save {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: white;
+}
+
+.rename-flow-save:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+.rename-flow-cancel:disabled,
+.rename-flow-save:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

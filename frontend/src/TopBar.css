@@ -1,0 +1,222 @@
+/* Mobile TopBar Styles */
+.mobile-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.topbar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  min-height: 40px;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.topbar-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.topbar-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  background: linear-gradient(to right, #3b82f6, #1d4ed8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+}
+
+.menu-toggle {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px;
+  color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.menu-toggle:hover {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: scale(1.05);
+}
+
+.menu-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Mobile Menu Dropdown */
+.mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-section {
+  padding: 8px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+/* New chat + chat history (aligned with desktop Sidebar behavior) */
+.menu-item-new-chat {
+  font-weight: 600;
+}
+
+.menu-item-new-chat .menu-icon {
+  color: #2563eb;
+}
+
+.mobile-menu-chats {
+  padding: 4px 12px 12px;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.mobile-menu-chats .sidebar-chats-toggle {
+  margin-top: 4px;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.mobile-menu-chats .sidebar-chats-button {
+  min-width: 0;
+  gap: 8px;
+}
+
+.mobile-menu-chats .sidebar-chats-button span {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #111827;
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mobile-menu-chats .sidebar-chats-list {
+  max-height: min(240px, 40vh);
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mobile-menu-chats .sidebar-chat-chip {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  gap: 12px;
+}
+
+.menu-item:hover {
+  background-color: #f8fafc;
+}
+
+.menu-item.active {
+  background-color: #dbeafe;
+  font-weight: 600;
+}
+
+.menu-item.active .menu-icon {
+  color: #1d4ed8;
+}
+
+.menu-icon {
+  font-size: 18px;
+  color: #6b7280;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+}
+
+.menu-label {
+  font-size: 16px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.menu-footer {
+  padding: 8px 0;
+}
+
+.menu-item.logout {
+  color: #dc2626;
+}
+
+.menu-item.logout .menu-icon {
+  color: #dc2626;
+}
+
+.menu-item.logout:hover {
+  background-color: #fef2f2;
+}
+
+.user-info {
+  padding: 12px 16px;
+  border-top: 1px solid #f3f4f6;
+  background-color: #f9fafb;
+}
+
+.user-email {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.user-email strong {
+  color: #374151;
+}
+
+/* Desktop styles remain unchanged - handled in component */

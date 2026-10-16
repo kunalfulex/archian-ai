@@ -1,0 +1,138 @@
+.connector-business-profile-panel {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 8px;
+  background: var(--surface-muted, #fafafa);
+}
+
+.cbp-title {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.cbp-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+}
+
+.cbp-hint {
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.cbp-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  resize: vertical;
+  min-height: 72px;
+}
+
+.cbp-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.cbp-setup-prompt {
+  margin: 0 0 0.75rem;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #065f46;
+  background: #ecfdf5;
+  border: 1px solid #6ee7b7;
+  border-radius: 6px;
+}
+
+.connector-business-profile-panel.cbp-setup-highlight {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.35);
+  animation: cbp-highlight-pulse 2s ease-in-out 3;
+}
+
+@keyframes cbp-highlight-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.35); }
+  50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.2); }
+}
+
+.cbp-save-btn {
+  margin-top: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #2563eb;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cbp-save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cbp-ai-block {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed #d1d5db;
+}
+
+.cbp-ai-block--standalone {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.cbp-ai-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+  margin-bottom: 0.35rem;
+}
+
+.cbp-ai-synopsis {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: #374151;
+}
+
+.cbp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+
+.cbp-tag {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.cbp-muted {
+  margin: 0.75rem 0 0;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.cbp-error {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  color: #b91c1c;
+}

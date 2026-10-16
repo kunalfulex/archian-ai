@@ -1,0 +1,510 @@
+/* 
+ * DataTable.css - SCOPED CSS for DataTable component ONLY
+ * 
+ * IMPORTANT: This CSS is designed to ONLY affect DataTable components
+ * and should NOT interfere with other pages like DataTablePage, 
+ * SalesforceMapper, etc.
+ * 
+ * USAGE: Import this CSS ONLY in pages that use the DataTable component:
+ * - SuccessfulMigrationsPage.js
+ * - FailedMigrationsPage.js
+ * 
+ * DO NOT import this CSS globally or in other pages to prevent conflicts.
+ * 
+ * All selectors are scoped to .data-table-container and .data-table
+ * to prevent global CSS conflicts.
+ */
+
+/* DataTable component - SCOPED to only affect DataTable instances */
+.data-table-container {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+/* Controls Section */
+.data-table-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  border-bottom: none;
+  background: transparent;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 8px !important; /* Reduced spacing below search bar - IMPORTANT to override other CSS */
+}
+
+.search-container {
+  position: relative;
+  flex: 1;
+  min-width: 300px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  width: 16px;
+  height: 16px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.page-size-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.page-size-select {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  background: white;
+  cursor: pointer;
+}
+
+.page-size-select:focus {
+  border-color: #3b82f6;
+}
+
+/* Table Styles - SCOPED to DataTable component only */
+/* This will NOT affect other pages like DataTablePage */
+.data-table .table-wrapper {
+  overflow-x: auto !important;
+  max-width: 100% !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  background: white !important;
+  /* Force horizontal scrollbar to always show */
+  overflow-y: hidden;
+  /* Ensure horizontal scroll is visible */
+  scrollbar-width: auto;
+  -webkit-overflow-scrolling: touch;
+  /* Remove internal spacing */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* Ensure content is contained within border */
+  position: relative;
+}
+
+/* Custom scrollbar styling - Scoped to DataTable component only */
+.data-table .table-wrapper::-webkit-scrollbar {
+  height: 16px !important; /* Increased height for better visibility */
+  display: block !important;
+}
+
+.data-table .table-wrapper::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.data-table .table-wrapper::-webkit-scrollbar-thumb {
+  background: #9ca3af !important; /* Grey color for subtle appearance */
+  border-radius: 4px;
+  border: 2px solid #f1f5f9;
+}
+
+.data-table .table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #6b7280 !important; /* Darker grey on hover */
+}
+
+/* Force scrollbar to always be visible - Scoped to DataTable component only */
+.data-table .table-wrapper {
+  scrollbar-width: auto !important;
+  scrollbar-color: #9ca3af #f1f5f9 !important;
+}
+
+/* Ensure table content is properly contained within wrapper - Scoped to DataTable component only */
+.data-table .table-wrapper > table {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.data-table {
+  width: 100%;
+  min-width: auto !important; /* Let table size naturally based on content */
+  max-width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  table-layout: auto; /* Auto table layout for natural column sizing */
+  /* Ensure table content is properly contained */
+  overflow: visible;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Ensure all columns can size naturally - ONLY for DataTable component */
+.data-table th,
+.data-table td {
+  min-width: auto;
+  max-width: none;
+  width: auto;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+/* Ensure all table cells respect their widths */
+.data-table th,
+.data-table td {
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+/* Ensure table wrapper contains all content - REMOVED GLOBAL RULE */
+
+/* Force Record Data column to show complete content */
+.data-table td.record-data-cell,
+.data-table th:nth-child(6) {
+  overflow: visible !important;
+  white-space: nowrap !important;
+  text-overflow: clip !important;
+  min-width: auto !important;
+  max-width: none !important;
+  width: auto !important;
+  /* Ensure content stays within table boundaries */
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+}
+
+/* Force the table wrapper to be scrollable - REMOVED GLOBAL RULE */
+
+/* Page-specific styling - these are global and should remain */
+.successful-migrations-page {
+  width: 100%;
+  overflow: visible;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Dashboard container styling */
+.dashboard-container {
+  width: 100%;
+  overflow: visible;
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+/* Failed migrations page styling */
+.failed-migrations-page {
+  width: 100%;
+  overflow: visible;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Table header styling - Scoped to DataTable component only */
+.data-table .table-header {
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #f3f4f6;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.data-table .table-header.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s;
+}
+
+.data-table .table-header.sortable:hover {
+  background: #f1f5f9;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.sort-indicator {
+  display: flex;
+  align-items: center;
+}
+
+.sort-icon {
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.sort-icon.active {
+  color: #3b82f6;
+}
+
+.sort-icon.inactive {
+  opacity: 0.3;
+}
+
+/* Table row styling - Scoped to DataTable component only */
+.data-table .table-row {
+  border-bottom: 1px solid #f3f4f6;
+  transition: background-color 0.2s;
+}
+
+.data-table .table-row:hover {
+  background: #f9fafb;
+}
+
+/* Table cell styling - Scoped to DataTable component only */
+.data-table .table-cell {
+  padding: 12px 16px;
+  color: #374151;
+  vertical-align: top;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  max-width: none; /* Allow full content display */
+  border-right: 1px solid #f3f4f6;
+  border-bottom: 1px solid #f3f4f6;
+  box-sizing: border-box;
+}
+
+/* Row number column styling - Scoped to DataTable component only */
+.data-table .table-cell:first-child {
+  width: 60px;
+  min-width: 60px;
+  max-width: 60px;
+  text-align: center;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+/* Status cell styling */
+.status-cell {
+  text-align: center;
+}
+
+/* Status badge styling - Scoped to DataTable component only */
+.data-table .status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  min-width: 60px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.status-created {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-success {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+/* Enhanced status badge styles for different statuses */
+.data-table .status-badge[style*="background-color: #d1fae5"] {
+  /* Created status - green */
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.1);
+}
+
+.data-table .status-badge[style*="background-color: #dbeafe"] {
+  /* Updated status - blue */
+  box-shadow: 0 1px 3px rgba(59, 130, 246, 0.1);
+}
+
+.data-table .status-badge[style*="background-color: #fef3c7"] {
+  /* Other statuses - amber */
+  box-shadow: 0 1px 3px rgba(245, 158, 11, 0.1);
+}
+
+.data-table .status-badge[style*="background-color: #fee2e2"] {
+  /* Failed status - red */
+  box-shadow: 0 1px 3px rgba(220, 38, 38, 0.1);
+}
+
+/* Record Data column styling for long content */
+.record-data-cell {
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  min-width: 800px !important;
+  max-width: none !important;
+  width: auto !important;
+}
+
+/* Object type cell styling */
+.object-cell {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 13px;
+  color: #059669;
+}
+
+/* View record link styling */
+.view-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.view-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* Date cell styling */
+.date-cell {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Key fields cell styling */
+.key-fields-cell {
+  max-width: 300px;
+  line-height: 1.4;
+}
+
+/* Pagination Styles */
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pagination-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-btn:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .data-table-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-container {
+    min-width: auto;
+  }
+  
+  .pagination-container {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  
+  /* .table-wrapper styling removed - was overriding DataTablePage styles */
+  
+  /* Table header and cell padding - Scoped to DataTable component only */
+  .data-table .table-header,
+  .data-table .table-cell {
+    padding: 8px 12px;
+  }
+  
+  .data-table {
+    min-width: 600px; /* Smaller minimum width on mobile */
+  }
+}
+
+/* Loading and Empty States */
+.data-table-container.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+}
+
+.empty-state h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.remove-padding {
+  padding: 0!important;
+  margin: 0!important;
+  box-sizing: border-box;
+}

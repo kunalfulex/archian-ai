@@ -1,0 +1,162 @@
+.planner-recovery-panel {
+  margin-top: 10px;
+  padding: 12px 14px;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  background: #fef2f2;
+}
+
+.planner-recovery-title {
+  margin: 0 0 8px;
+  font-weight: 600;
+  color: #991b1b;
+}
+
+.planner-recovery-summary,
+.planner-recovery-rationale {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #7f1d1d;
+}
+
+.planner-recovery-fields-label {
+  margin: 0 0 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #991b1b;
+}
+
+.planner-recovery-fields {
+  margin: 0 0 12px;
+  padding-left: 1.2rem;
+  font-size: 0.85rem;
+  color: #1a202c;
+}
+
+.planner-recovery-more {
+  color: #6b7280;
+  font-style: italic;
+}
+
+.planner-recovery-error {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  color: #7f1d1d;
+}
+
+.planner-recovery-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.planner-recovery-apply {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  background: #dc2626;
+  color: #fff;
+  cursor: pointer;
+}
+
+.planner-recovery-apply:hover {
+  background: #b91c1c;
+}
+
+.planner-recovery-dismiss {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid #f87171;
+  border-radius: 6px;
+  background: transparent;
+  color: #991b1b;
+  cursor: pointer;
+}
+
+.planner-recovery-dismiss:hover {
+  background: #fee2e2;
+}
+
+.planner-recovery-panel--loading {
+  border-color: #fca5a5;
+}
+
+.planner-recovery-loading {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #7f1d1d;
+  font-style: italic;
+}
+
+.planner-recovery-confidence {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  color: #9a3412;
+}
+
+.planner-recovery-confidence span {
+  text-transform: capitalize;
+}
+
+.planner-recovery-relationship {
+  margin: 0 0 10px;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #7c2d12;
+  background: #fff7ed;
+  border-radius: 6px;
+  border: 1px solid #fed7aa;
+}
+
+.planner-recovery-clusters--inform {
+  border-left: 3px solid #f87171;
+  padding-left: 10px;
+}
+
+.planner-recovery-clusters--recoverable {
+  border-left: 3px solid #34d399;
+  padding-left: 10px;
+}
+
+.planner-recovery-inform-notice {
+  margin: 0 0 10px;
+  font-size: 0.85rem;
+  color: #7f1d1d;
+}
+
+.planner-recovery-cluster-list {
+  margin: 0 0 12px;
+  padding-left: 1.2rem;
+  font-size: 0.85rem;
+  color: #1a202c;
+}
+
+.planner-recovery-cluster-sample {
+  color: #6b7280;
+  font-weight: normal;
+}
+
+.planner-recovery-steps-label {
+  margin: 0 0 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #991b1b;
+}
+
+.planner-recovery-steps {
+  margin: 0 0 12px;
+  padding-left: 1.4rem;
+  font-size: 0.9rem;
+  color: #1a202c;
+}
+
+.planner-recovery-apply:disabled,
+.planner-recovery-dismiss:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

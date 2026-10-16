@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /
+
+# Block all crawling on app.archian.ai (archian ai app)
+# This is the login/dashboard subdomain and should not be indexed
+
+# Allow only essential assets
+Allow: /static/
+Allow: /assets/
+Allow: /favicon.ico
+Allow: /robots.txt

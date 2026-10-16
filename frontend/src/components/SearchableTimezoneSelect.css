@@ -1,0 +1,169 @@
+.searchable-timezone-select {
+  position: relative;
+  width: 100%;
+}
+
+.timezone-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.timezone-select-trigger:hover:not(.disabled) {
+  border-color: #4a90e2;
+}
+
+.timezone-select-trigger.open {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.timezone-select-trigger.disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.timezone-select-value {
+  flex: 1;
+  text-align: left;
+  color: #333;
+}
+
+.timezone-select-trigger svg {
+  color: #666;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+.timezone-select-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  margin-top: 4px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.timezone-search-box {
+  position: relative;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  background-color: #f9f9f9;
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+}
+
+.timezone-search-input {
+  width: 100%;
+  padding: 8px 12px 8px 35px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.timezone-search-input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.timezone-select-options {
+  overflow-y: auto;
+  max-height: 320px;
+  padding: 4px 0;
+}
+
+.timezone-country-group {
+  margin-bottom: 8px;
+}
+
+.timezone-country-header {
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.timezone-option {
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  font-size: 14px;
+  color: #333;
+  border-left: 3px solid transparent;
+}
+
+.timezone-option:hover {
+  background-color: #f0f7ff;
+  border-left-color: #4a90e2;
+}
+
+.timezone-option.selected {
+  background-color: #e8f4fd;
+  border-left-color: #4a90e2;
+  font-weight: 500;
+}
+
+.timezone-option.selected::after {
+  content: '✓';
+  float: right;
+  color: #4a90e2;
+  font-weight: bold;
+}
+
+.timezone-no-results {
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+}
+
+/* Scrollbar styling */
+.timezone-select-options::-webkit-scrollbar {
+  width: 8px;
+}
+
+.timezone-select-options::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.timezone-select-options::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.timezone-select-options::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+

@@ -1,0 +1,26 @@
+/* Dashboard specific styles */
+
+/* Row number column width control - make it narrow */
+.dashboard-table th:first-child,
+.dashboard-table td:first-child,
+.dashboard-table th:nth-child(1),
+.dashboard-table td:nth-child(1) {
+  width: 60px !important;
+  min-width: 60px !important;
+  max-width: 60px !important;
+  text-align: center;
+}
+
+/* Results table row number column */
+.results-table th:first-child,
+.results-table td:first-child,
+.results-table th:nth-child(1),
+.results-table td:nth-child(1) {
+  width: 60px !important;
+  min-width: 60px !important;
+  max-width: 60px !important;
+  text-align: center;
+}
+
+/* Avoid global `table th/td:first-child` — breaks unrelated tables (e.g. flow detail source preview). */
+

@@ -1,0 +1,37 @@
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/.venv/
+**/venv/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+
+# Node
+**/node_modules/
+**/build/
+**/coverage/
+**/.eslintcache
+
+# Env / secrets
+**/.env
+**/.env.*
+!**/.env.example
+**/certs/
+**/*.pem
+**/*.key
+!**/*.key.example
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Local
+SOURCE_REVISIONS.txt
+
+**/.npm-cache/
+**/*.log
+**/devserver.pid
+**/nohup.out

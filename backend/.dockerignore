@@ -1,0 +1,12 @@
+.env
+.env.*
+*.bak
+__pycache__
+*.pyc
+.venv
+venv
+*.log
+certs/
+extra-requirements.txt
+github_token
+*.egg-info
