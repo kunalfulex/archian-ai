@@ -33,8 +33,9 @@ jobs:
       - name: Install
         run: |
           python -m venv venv
-          ./venv/bin/pip install -U pip
-          ./venv/bin/pip install -r requirements.txt
+          ./venv/bin/pip install -U pip setuptools wheel
+          # cx-Oracle's build needs setuptools/pkg_resources in the build env
+          ./venv/bin/pip install --no-build-isolation -r requirements.txt
       - name: Plan ops smoke
         run: ./venv/bin/python scripts/e2e_plan_ops_smoke.py
       - name: Pytest
