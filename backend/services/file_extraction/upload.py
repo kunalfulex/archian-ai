@@ -1,7 +1,6 @@
 """Shared file upload + background extraction job start (chat agentic + legacy upload-async)."""
 from __future__ import annotations
 
-import asyncio
 import os
 import uuid
 from typing import Any, Dict, Optional, Tuple
@@ -19,7 +18,7 @@ async def validate_and_prepare_file_upload(
 ) -> Tuple[str, str, str, float]:
     """
     Validate plan limits and extension. Returns (job_id, file_key, file_extension, size_mb).
-  Raises HTTPException on validation failure.
+    Raises HTTPException on validation failure.
     """
     from services.entitlements import get_entitlements  # noqa: PLC0415
 
@@ -50,21 +49,15 @@ async def validate_and_prepare_file_upload(
     return job_id, file_key, file_extension, file_size_mb
 
 
-def _s3_bucket_name() -> str:
-    return os.getenv("S3_BUCKET_NAME") or os.getenv("AWS_S3_BUCKET") or "edisonaistorage"
-
-
 async def upload_file_bytes_to_s3(*, file_key: str, file_content: bytes) -> None:
-    import boto3
+    """Persist upload bytes (local disk or S3 via file_store). Name kept for call-site compat."""
+    from services.file_store import put_bytes
 
-    bucket = _s3_bucket_name()
-    client = boto3.client("s3")
-    await asyncio.to_thread(
-        client.put_object,
-        Bucket=bucket,
-        Key=file_key,
-        Body=file_content,
-    )
+    await put_bytes(file_key=file_key, file_content=file_content)
+
+
+# Prefer this name in new code
+upload_file_bytes = upload_file_bytes_to_s3
 
 
 async def start_file_extraction_job(
@@ -84,7 +77,7 @@ async def start_file_extraction_job(
     parent_job_id: Optional[str] = None,
     log_extraction_started: bool = True,
 ) -> None:
-    """Upload already on S3; enqueue process_extraction_background and optional chat event."""
+    """Upload already stored; enqueue process_extraction_background and optional chat event."""
     from utils.task_limiter import create_limited_task
     from services.file_extraction.background import process_extraction_background
     from services.chat_service import ChatService

@@ -15,11 +15,8 @@ from handlers.classification_handler import classify_source_destination
 from routes.auth import get_current_user
 from services.chat_service import ChatService
 from services.entitlements import get_entitlements
-from services.file_extraction.background import (
-    BUCKET_NAME,
-    process_extraction_background,
-    s3_client,
-)
+from services.file_extraction.background import process_extraction_background
+from services.file_store import put_bytes
 from services.flow_migration_background import get_background_job
 from services.migration_records_service import MigrationRecordsService
 from utils.job_stores import extraction_jobs, sql_tasks
@@ -198,9 +195,9 @@ async def upload_file_async(
                 print(f"⚠️ Classification error for job {job_id}: {classification_error}")
                 classification_result = {}
 
-        # Upload file to S3 (run in thread pool to avoid blocking event loop)
+        # Persist upload (local disk or S3 via file_store)
         file_key = f"{job_id}_{file.filename}"
-        await asyncio.to_thread(s3_client.put_object, Bucket=BUCKET_NAME, Key=file_key, Body=file_content)
+        await put_bytes(file_key=file_key, file_content=file_content)
 
         _, file_extension = os.path.splitext(file.filename)
         file_extension = file_extension.lower()

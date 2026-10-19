@@ -1,4 +1,4 @@
-"""File extraction background worker (S3 download + structured extract)."""
+"""File extraction background worker (download + structured extract)."""
 
 import asyncio
 import os
@@ -8,7 +8,6 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 from uuid import UUID
 
-import boto3
 import pandas as pd
 
 import services.architect_agent as architect
@@ -164,11 +163,13 @@ async def process_extraction_background(
                 # Progress updates are quick and frequent, so we don't limit them
                 asyncio.create_task(extraction_jobs.update(job_id, {"progress": progress_percent}))
             
-            update_progress(10, "Downloading file from S3...")
+            update_progress(10, "Loading uploaded file...")
             
-            # Download file from S3 (run in thread pool to avoid blocking event loop)
+            # Download from local disk or S3 via file_store
+            from services.file_store import download_to_fileobj
+
             with tempfile.NamedTemporaryFile(delete=False, suffix=file_extension) as temp_file:
-                await asyncio.to_thread(s3_client.download_fileobj, BUCKET_NAME, file_key, temp_file)
+                await download_to_fileobj(file_key=file_key, fileobj=temp_file)
                 temp_file.flush()
                 temp_file_path = temp_file.name
                 # Update progress (Redis-backed)
@@ -975,10 +976,3 @@ async def process_extraction_background(
             )
         except Exception as save_error:
             print(f"⚠️ Failed to save failed extraction result: {save_error}")
-
-
-# Initialize S3 client
-s3_client = boto3.client('s3')
-
-
-BUCKET_NAME = 'edisonaistorage'  # Replace with your S3 bucket name

@@ -5,6 +5,7 @@ import uuid
 from typing import TYPE_CHECKING, Any, Dict, Optional
 
 from services.file_extraction.upload import upload_file_bytes_to_s3
+from services.file_store import get_bytes
 
 if TYPE_CHECKING:
     from services.intent.session_continuation import SessionContinuationDecision
@@ -203,25 +204,13 @@ async def stage_pending_file_upload(
 
 
 async def load_pending_file_upload(ref: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
-    """Load staged bytes from S3 using _pending_file_ref from planner_pending."""
+    """Load staged bytes from file store using _pending_file_ref from planner_pending."""
     if not ref or not isinstance(ref, dict):
         return None
     file_key = (ref.get("file_key") or "").strip()
     if not file_key:
         return None
-    import asyncio
-    import os
-
-    import boto3
-
-    bucket = os.getenv("S3_BUCKET_NAME") or os.getenv("AWS_S3_BUCKET") or "edisonaistorage"
-    client = boto3.client("s3")
-
-    def _get() -> bytes:
-        obj = client.get_object(Bucket=bucket, Key=file_key)
-        return obj["Body"].read()
-
-    content = await asyncio.to_thread(_get)
+    content = await get_bytes(file_key=file_key)
     return {
         "filename": ref.get("filename") or "upload",
         "content": content,

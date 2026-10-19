@@ -4,18 +4,13 @@ Caps: standard plans max 30 days; non-standard (enterprise/custom) plan_limits u
 """
 
 import asyncio
-import os
 from typing import Any, Dict, Optional, Tuple
 
-import boto3
 from db.connection import database
+from services.file_store import delete_key
 
 STANDARD_MAX_RETENTION_DAYS = 30
 ENTERPRISE_MAX_RETENTION_DAYS = 365
-
-
-def _bucket_name() -> str:
-    return os.getenv("S3_BUCKET_NAME") or os.getenv("AWS_S3_BUCKET") or "edisonaistorage"
 
 
 class DataRetentionService:
@@ -99,16 +94,7 @@ class DataRetentionService:
         key = source_identifier.strip()
         if not key.startswith(f"{job_id}_"):
             return
-        bucket = _bucket_name()
-        client = boto3.client("s3")
-
-        def _delete() -> None:
-            try:
-                client.delete_object(Bucket=bucket, Key=key)
-            except Exception as e:
-                print(f"⚠️ data_retention S3 delete_object failed key={key}: {e}")
-
-        await asyncio.to_thread(_delete)
+        await delete_key(file_key=key)
 
     @staticmethod
     async def purge_for_user(user_id: str) -> Dict[str, int]:
