@@ -1,0 +1,8 @@
+# Gitleaks config for Archian AI community repo.
+title = "archian-ai"
+
+[allowlist]
+description = "Disposable pytest Fernet key briefly committed then removed (not a production secret)"
+regexes = [
+  '''wnwFbghsG5LZrxXSrVpA8LAHg0_Rs5eKy32UrxDPKQw=''',
+]

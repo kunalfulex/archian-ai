@@ -30,7 +30,7 @@ def test_auto_uses_local_without_aws(tmp_path, monkeypatch):
         await file_store.put_bytes(file_key="job1_demo.csv", file_content=b"a,b\n1,2\n")
         return await file_store.get_bytes(file_key="job1_demo.csv")
 
-    data = asyncio.get_event_loop().run_until_complete(_run())
+    data = asyncio.run(_run())
     assert data == b"a,b\n1,2\n"
     assert (tmp_path / "job1_demo.csv").is_file()
 
@@ -44,7 +44,7 @@ def test_rejects_path_traversal(tmp_path, monkeypatch):
         await file_store.put_bytes(file_key="../escape.txt", file_content=b"x")
 
     with pytest.raises(ValueError):
-        asyncio.get_event_loop().run_until_complete(_run())
+        asyncio.run(_run())
 
 
 def test_s3_mode_requires_bucket(monkeypatch):
