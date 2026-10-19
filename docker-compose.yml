@@ -1,4 +1,5 @@
 # Archian AI local quickstart (community edition).
+# File uploads stay on a Docker volume (local disk) — no AWS/S3 required.
 # SQL/CSV and file flows work with only OPENAI_API_KEY + JWT_SECRET.
 # Salesforce / Google OAuth are optional — see README and backend/.env.example.
 services:
@@ -45,7 +46,13 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
       BACKEND_URL: ${BACKEND_URL:-http://localhost:8000}
+      # Community: store uploads on the container volume (not Archian S3)
+      FILE_STORAGE: ${FILE_STORAGE:-local}
+      LOCAL_UPLOAD_DIR: ${LOCAL_UPLOAD_DIR:-/data/uploads}
+      RUNNING_IN_DOCKER: "true"
       PORT: "8000"
+    volumes:
+      - archian_uploads:/data/uploads
     ports:
       - "8000:8000"
     depends_on:
@@ -72,4 +79,5 @@ services:
 
 volumes:
   archian_pg:
+  archian_uploads:
   frontend_node_modules:

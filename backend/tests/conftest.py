@@ -1,6 +1,16 @@
 """Shared pytest fixtures for backend tests."""
 from __future__ import annotations
 
+import os
+
+# Must be set before collection imports SQLConnectorService (module-level singleton).
+# Generate at runtime so the repo never embeds a Fernet key (gitleaks).
+os.environ.setdefault("JWT_SECRET", "test-secret-for-unit-tests")
+if not os.environ.get("SQL_CONNECTOR_ENCRYPTION_KEY"):
+    from cryptography.fernet import Fernet
+
+    os.environ["SQL_CONNECTOR_ENCRYPTION_KEY"] = Fernet.generate_key().decode()
+
 import pytest
 
 

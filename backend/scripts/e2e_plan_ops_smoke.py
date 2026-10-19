@@ -79,7 +79,8 @@ def main() -> int:
             "_plan_scope": {"operations": ["extract", "join"]},
         },
         "Join Book A Tab1 and Book B Tab2 on Email",
-        ["extract_google_sheets", "gsheets_execute_operation"],
+        # One extract per source workbook, then join.
+        ["extract_google_sheets", "extract_google_sheets", "gsheets_execute_operation"],
     )
 
     _assert_ops(

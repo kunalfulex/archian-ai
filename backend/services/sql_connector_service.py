@@ -8,7 +8,7 @@ from typing import AsyncIterator, List, Dict, Any, Optional
 logger = logging.getLogger(__name__)
 import aiomysql
 import aiopg
-import cx_Oracle
+import oracledb as cx_Oracle
 from google.cloud import bigquery
 from google.oauth2 import service_account
 import os

@@ -1,7 +1,7 @@
 # Backend API with MSSQL ODBC driver (build context = backend/ for Render rootDir)
 FROM python:3.11-slim-bookworm
 
-# Install Microsoft ODBC Driver 18 + build tools (gcc required for building cx-Oracle from source).
+# Install Microsoft ODBC Driver 18 + build tools (pyodbc / native deps).
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential curl git apt-transport-https gnupg2 ca-certificates unixodbc unixodbc-dev \
     && curl -fsSL -o /tmp/packages-microsoft-prod.deb https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb \
@@ -14,9 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /app
 COPY requirements.txt .
 COPY . .
-# setuptools required for building cx-Oracle (pkg_resources); use no-build-isolation so build sees it.
-RUN pip install --no-cache-dir setuptools wheel \
-    && pip install --no-cache-dir --no-build-isolation -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Optional private add-ons (cloud edition): Render secret files "extra-requirements.txt"
 # (plain https://github.com/... URLs, no credentials) and "github_token".
