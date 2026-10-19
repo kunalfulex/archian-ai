@@ -20,6 +20,10 @@ jobs:
 
   backend:
     runs-on: ubuntu-latest
+    env:
+      # Required at import time by SQLConnectorService / sql_background_service
+      SQL_CONNECTOR_ENCRYPTION_KEY: wnwFbghsG5LZrxXSrVpA8LAHg0_Rs5eKy32UrxDPKQw=
+      JWT_SECRET: test-secret-for-ci
     defaults:
       run:
         working-directory: backend

@@ -1,6 +1,15 @@
 """Shared pytest fixtures for backend tests."""
 from __future__ import annotations
 
+import os
+
+# Must be set before collection imports SQLConnectorService (module-level singleton).
+os.environ.setdefault(
+    "SQL_CONNECTOR_ENCRYPTION_KEY",
+    "wnwFbghsG5LZrxXSrVpA8LAHg0_Rs5eKy32UrxDPKQw=",
+)
+os.environ.setdefault("JWT_SECRET", "test-secret-for-unit-tests")
+
 import pytest
 
 
