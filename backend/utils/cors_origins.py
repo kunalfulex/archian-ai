@@ -1,56 +1,97 @@
-"""Shared CORS / trusted frontend origin checks (CSRF fallback + middleware)."""
+"""CORS / trusted frontend origin checks (CSRF fallback + middleware).
+
+Origins are env-driven. Defaults are local only — hosted deployments must set
+FRONTEND_URL and optionally CORS_ALLOWED_ORIGINS / TRUSTED_HOSTS. No product
+hostnames are baked into this module.
+"""
 from __future__ import annotations
 
 import os
-import re
 from urllib.parse import urlparse
 
-# Explicit Render frontends only — never allow all of onrender.com.
-RENDER_FRONTEND_ORIGINS = (
-    "https://edisonai-frontend-dev.onrender.com",
-    "https://edisonai-frontend-uat.onrender.com",
+from utils.url_defaults import DEFAULT_BACKEND_URL, DEFAULT_FRONTEND_URL
+
+# Re-export for callers / tests.
+__all__ = (
+    "DEFAULT_BACKEND_URL",
+    "DEFAULT_FRONTEND_URL",
+    "normalize_origin",
+    "host_from_url",
+    "get_allowed_origins",
+    "is_allowed_cors_origin",
+    "get_trusted_hosts",
+    "request_trusted_origin",
+    "cors_headers_for_origin",
 )
 
-ARCHIAN_ORIGIN_REGEX = r"^https://([a-zA-Z0-9-]+\.)*archian\.ai$"
-RENDER_ORIGIN_REGEX = r"^https://edisonai-frontend-(dev|uat)\.onrender\.com$"
-COMBINED_ORIGIN_REGEX = (
-    r"^https://("
-    r"([a-zA-Z0-9-]+\.)*archian\.ai"
-    r"|edisonai-frontend-(dev|uat)\.onrender\.com"
-    r")$"
-)
-
-_STATIC_ALLOWED_ORIGINS = (
-    "https://edisonai.io",
-    "https://app.archian.ai",
-    "https://www.archian.ai",
-    "https://archian.ai",
+_LOCAL_FRONTEND_ORIGINS = (
     "http://localhost:3000",
     "https://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://127.0.0.1:3000",
 )
 
 
 def normalize_origin(url: str) -> str:
-    return url.rstrip("/")
+    return (url or "").rstrip("/")
+
+
+def host_from_url(url: str) -> str | None:
+    raw = (url or "").strip()
+    if not raw:
+        return None
+    if "://" not in raw:
+        raw = f"https://{raw}"
+    parsed = urlparse(raw)
+    return parsed.hostname or None
+
+
+def _split_csv(raw: str | None) -> list[str]:
+    if not raw:
+        return []
+    return [p.strip() for p in raw.split(",") if p.strip()]
 
 
 def get_allowed_origins() -> list[str]:
-    frontend_url = normalize_origin(os.getenv("FRONTEND_URL", "https://app.archian.ai"))
-    origins = [frontend_url, *_STATIC_ALLOWED_ORIGINS, *RENDER_FRONTEND_ORIGINS]
-    return list(dict.fromkeys(origins))
+    frontend_url = normalize_origin(os.getenv("FRONTEND_URL", DEFAULT_FRONTEND_URL))
+    origins: list[str] = []
+    if frontend_url:
+        origins.append(frontend_url)
+    if "localhost" in frontend_url or "127.0.0.1" in frontend_url:
+        origins.extend(_LOCAL_FRONTEND_ORIGINS)
+    for part in _split_csv(os.getenv("CORS_ALLOWED_ORIGINS")):
+        origins.append(normalize_origin(part))
+    return list(dict.fromkeys(o for o in origins if o))
 
 
 def is_allowed_cors_origin(origin: str | None) -> bool:
     if not origin:
         return False
-    normalized = normalize_origin(origin)
-    if normalized in get_allowed_origins():
-        return True
-    if re.match(ARCHIAN_ORIGIN_REGEX, normalized):
-        return True
-    if re.match(RENDER_ORIGIN_REGEX, normalized):
-        return True
-    return False
+    return normalize_origin(origin) in get_allowed_origins()
+
+
+def get_trusted_hosts() -> list[str]:
+    """Host header allowlist for TrustedHostMiddleware."""
+    hosts: list[str] = ["localhost", "127.0.0.1", "0.0.0.0", "testserver"]
+    for key, default in (
+        ("FRONTEND_URL", DEFAULT_FRONTEND_URL),
+        ("BACKEND_URL", DEFAULT_BACKEND_URL),
+    ):
+        host = host_from_url(os.getenv(key, default))
+        if host:
+            hosts.append(host)
+    backend_host = (os.getenv("BACKEND_HOST") or "").strip()
+    if backend_host:
+        hosts.append(backend_host)
+    # Extra hosts: bare hostnames or "*.example.com" wildcards (Starlette style).
+    for part in _split_csv(os.getenv("TRUSTED_HOSTS")):
+        if part.startswith("*."):
+            hosts.append(part)
+        else:
+            host = host_from_url(part) if "://" in part else part
+            if host:
+                hosts.append(host)
+    return list(dict.fromkeys(h for h in hosts if h))
 
 
 def request_trusted_origin(request) -> str | None:

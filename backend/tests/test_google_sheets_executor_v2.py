@@ -61,7 +61,7 @@ def test_upsert_completion_summary_includes_workbook_and_preview():
         sheet_name="Sheet1",
     )
     records = [
-        {"Name": "Edison Test 2", "Email": "hello@edisonai.io"},
+        {"Name": "Edison Test 2", "Email": "hello@example.com"},
         {"Name": "Rose Gonzalez", "Email": "rose@edge.com"},
     ]
     result = UpsertResult(rows_inserted=27, rows_updated=0, processed_records=27)
@@ -78,5 +78,5 @@ def test_upsert_completion_summary_includes_workbook_and_preview():
     assert "27" in text
     assert "new row(s) added" in text
     assert "Edison Test 2" in text
-    assert "hello@edisonai.io" in text
+    assert "hello@example.com" in text
     assert "docs.google.com/spreadsheets/d/abc123" in text

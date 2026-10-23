@@ -89,6 +89,8 @@ Migrations: see [backend/db/migrations/EDITION.md](backend/db/migrations/EDITION
 | `community` (default) | No billing UI/APIs; local file storage by default; unlimited local usage gates |
 | `cloud` | Requires private `archian-cloud` at build/install time; optional S3 |
 
+CORS, Trusted Host, and CSP allowlists are **env-driven** (local defaults only). Hosted installs must set `FRONTEND_URL`, `BACKEND_URL`, and usually `CORS_ALLOWED_ORIGINS` / `TRUSTED_HOSTS` / `SUPPORT_EMAIL` — see `backend/.env.example`.
+
 ## License
 
 [GNU Affero General Public License v3.0](LICENSE) (AGPL-3.0).

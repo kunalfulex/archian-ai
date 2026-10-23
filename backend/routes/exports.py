@@ -20,6 +20,7 @@ from db.connection import database, export_database
 from routes.auth import get_current_user
 from services.migration_records_service import MigrationRecordsService
 from utils.email_utils import send_export_ready_email, send_migration_export_ready_email
+from utils.url_defaults import DEFAULT_BACKEND_URL
 from utils.user_email import get_user_email
 
 router = APIRouter()
@@ -641,7 +642,7 @@ async def process_migration_export_task(
             """UPDATE migration_export_tasks SET status = 'completed', download_token = :token, file_path = :path, completed_at = NOW() WHERE id = :id""",
             values={"id": task_id, "token": download_token, "path": file_path},
         )
-        backend_url = os.getenv("BACKEND_URL", "https://api.archian.ai").rstrip("/")
+        backend_url = os.getenv("BACKEND_URL", DEFAULT_BACKEND_URL).rstrip("/")
         user_email = await get_user_email(user_id)
         if user_email:
             download_url = f"{backend_url}/migration-export-download?token={download_token}"
@@ -728,7 +729,7 @@ async def process_migration_export_user_task(
             """UPDATE migration_export_tasks SET status = 'completed', download_token = :token, file_path = :path, completed_at = NOW() WHERE id = :id""",
             values={"id": task_id, "token": download_token, "path": file_path},
         )
-        backend_url = os.getenv("BACKEND_URL", "https://api.archian.ai").rstrip("/")
+        backend_url = os.getenv("BACKEND_URL", DEFAULT_BACKEND_URL).rstrip("/")
         user_email = await get_user_email(user_id)
         if user_email:
             download_url = f"{backend_url}/migration-export-download?token={download_token}"
@@ -746,7 +747,7 @@ async def process_migration_export_user_task(
 
 async def process_export_task(task_id: str, user_id: str, user_email: Optional[str], start_date: str, end_date: str):
     """Background task: build Excel, save to file, update task, send email with download link."""
-    backend_url = os.getenv("BACKEND_URL", "https://api.archian.ai").rstrip("/")
+    backend_url = os.getenv("BACKEND_URL", DEFAULT_BACKEND_URL).rstrip("/")
     try:
         records = await _fetch_migration_records_for_export(user_id, start_date, end_date)
         if not records:
