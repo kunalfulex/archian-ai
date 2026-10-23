@@ -11,6 +11,8 @@ from typing import Optional
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from utils.url_defaults import DEFAULT_BACKEND_URL, DEFAULT_FRONTEND_URL
+
 
 class Settings(BaseSettings):
     # Env vars only (no env_file): main/tests call load_dotenv() first so .env is
@@ -23,10 +25,15 @@ class Settings(BaseSettings):
     # Edition: community (default) or cloud
     archian_edition: str = Field(default="community", alias="ARCHIAN_EDITION")
 
-    # Core URLs
-    frontend_url: str = Field(default="https://app.archian.ai", alias="FRONTEND_URL")
-    backend_url: Optional[str] = Field(default=None, alias="BACKEND_URL")
+    # Core URLs — local defaults for community; set explicitly on hosted deploys.
+    frontend_url: str = Field(default=DEFAULT_FRONTEND_URL, alias="FRONTEND_URL")
+    backend_url: str = Field(default=DEFAULT_BACKEND_URL, alias="BACKEND_URL")
     backend_host: Optional[str] = Field(default=None, alias="BACKEND_HOST")
+    # Comma-separated extras (hosted multi-origin / custom domains).
+    cors_allowed_origins: str = Field(default="", alias="CORS_ALLOWED_ORIGINS")
+    trusted_hosts: str = Field(default="", alias="TRUSTED_HOSTS")
+    support_email: str = Field(default="", alias="SUPPORT_EMAIL")
+    contact_to_email: str = Field(default="", alias="CONTACT_TO_EMAIL")
 
     # Database / Redis (optional here — required at runtime by connection layer)
     db_url: Optional[str] = Field(default=None, alias="DB_URL")

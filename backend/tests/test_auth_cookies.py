@@ -51,14 +51,16 @@ def test_csrf_passes_when_header_matches():
     )
 
 
-def test_csrf_passes_with_trusted_origin_without_header():
-    """Render cross-origin: session cookie sent but JS cannot read API-domain CSRF cookie."""
+def test_csrf_passes_with_trusted_origin_without_header(monkeypatch):
+    """Cross-origin: session cookie sent but JS cannot read API-domain CSRF cookie."""
+    monkeypatch.setenv("FRONTEND_URL", "https://app.example.com")
+    monkeypatch.delenv("CORS_ALLOWED_ORIGINS", raising=False)
     validate_csrf(
         _make_request(
             method="POST",
             path="/chat/conversations/abc/messages",
             cookies={SESSION_COOKIE: "jwt", CSRF_COOKIE: "abc"},
-            headers={"Origin": "https://edisonai-frontend-dev.onrender.com"},
+            headers={"Origin": "https://app.example.com"},
         )
     )
 

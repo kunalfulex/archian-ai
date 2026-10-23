@@ -65,7 +65,11 @@ async def send_code(request: SendCodeRequest, http_request: Request):
         user = await database.fetch_one("SELECT id, is_active FROM users WHERE email = :email AND is_deleted = FALSE", values={"email": email})
 
         if not user:
-            raise HTTPException(status_code=403, detail="This email is not authorized to access Archian AI. Please contact founders@archian.ai to request access.")
+            support = (os.getenv("SUPPORT_EMAIL") or "").strip()
+            detail = "This email is not authorized to access Archian AI."
+            if support:
+                detail += f" Please contact {support} to request access."
+            raise HTTPException(status_code=403, detail=detail)
 
         if not hasattr(user, 'is_active') or not user.is_active:
             raise HTTPException(status_code=403, detail="This account has been disabled. Please contact support.")

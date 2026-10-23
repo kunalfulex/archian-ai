@@ -5,10 +5,39 @@ from typing import Optional
 
 import httpx
 from dotenv import load_dotenv
+
+from utils.url_defaults import DEFAULT_FRONTEND_URL
+
 load_dotenv()
 
 POSTMARK_TOKEN = os.getenv("POSTMARK_API_TOKEN")
 SMTP_SENDER = os.getenv("SMTP_SENDER", "login@yourdomain.com")  # fallback
+
+
+def _support_email() -> str:
+    """Operator-configured support address (SUPPORT_EMAIL or CONTACT_TO_EMAIL)."""
+    return (
+        (os.getenv("SUPPORT_EMAIL") or "").strip()
+        or (os.getenv("CONTACT_TO_EMAIL") or "").strip()
+    )
+
+
+def _support_mailto_html() -> str:
+    email = _support_email()
+    if not email:
+        return ""
+    return (
+        f'<p>Need help? Contact us at '
+        f'<a href="mailto:{email}">{email}</a></p>'
+    )
+
+
+def _support_mailto_text() -> str:
+    email = _support_email()
+    if not email:
+        return ""
+    return f"Need help? Contact us at {email}"
+
 
 # User-facing sign-off for product completion emails (signup, migration, connector ready).
 EMAIL_SIGNATURE = "Archian AI Agent"
@@ -66,7 +95,7 @@ async def send_welcome_email(to_email: str, first_name: str):
     greeting = f"Hi {first_name}!" if first_name else "Hi there!"
     
     # Get frontend URL from environment
-    frontend_url = os.getenv('FRONTEND_URL', 'https://app.archian.ai')
+    frontend_url = os.getenv('FRONTEND_URL', DEFAULT_FRONTEND_URL)
     
     # HTML email template
     html_body = f"""
@@ -260,7 +289,7 @@ async def send_welcome_email(to_email: str, first_name: str):
                 </div>
                 
                 <div class="support">
-                    <p>Need help? Our support team is here for you at <a href="mailto:founders@archian.ai">founders@archian.ai</a></p>
+                    {_support_mailto_html() or "<p>Need help? Reply to this email or contact your administrator.</p>"}
                 </div>
             </div>
             
@@ -287,7 +316,7 @@ What you can do with Archian AI:
 
 Get started: {frontend_url}/dashboard
 
-Need help? Our support team is here for you at founders@archian.ai
+{_support_mailto_text() or "Need help? Reply to this email or contact your administrator."}
 
 Happy building!
 {EMAIL_SIGNATURE}
@@ -383,7 +412,7 @@ async def send_connector_agent_ready_email(
         f"and make your data work more easily.</p>"
     )
     if needs_connector_setup and connector_type == "salesforce" and setup_connections_path:
-        frontend_url = os.getenv("FRONTEND_URL", "https://app.archian.ai").rstrip("/")
+        frontend_url = os.getenv("FRONTEND_URL", DEFAULT_FRONTEND_URL).rstrip("/")
         setup_url = f"{frontend_url}{setup_connections_path}"
         body += build_setup_email_paragraph(setup_url=setup_url) + "\n"
         html_body += build_setup_email_paragraph_html(setup_url=setup_url)
@@ -914,7 +943,7 @@ async def send_subscription_change_email(to_email: str, first_name: str, old_pla
     greeting = f"Hi {first_name}!" if first_name else "Hi there!"
     
     # Get frontend URL from environment
-    frontend_url = os.getenv('FRONTEND_URL', 'https://app.archian.ai')
+    frontend_url = os.getenv('FRONTEND_URL', DEFAULT_FRONTEND_URL)
     
     # Format plan details for display
     credits_per_month = plan_details.get('credits_per_month', 0)
@@ -1174,7 +1203,7 @@ async def send_subscription_change_email(to_email: str, first_name: str, old_pla
                 </div>
                 
                 <div class="support">
-                    <p>Questions? Contact us at <a href="mailto:founders@archian.ai">founders@archian.ai</a></p>
+                    {_support_mailto_html().replace("Need help?", "Questions?") or "<p>Questions? Contact your administrator.</p>"}
                 </div>
             </div>
             
@@ -1205,7 +1234,7 @@ New Plan Details:
 
 Access your dashboard: {frontend_url}/dashboard
 
-Questions? Contact us at founders@archian.ai
+{_support_mailto_text().replace("Need help?", "Questions?") or "Questions? Contact your administrator."}
 
 The Archian AI Team
     """
@@ -1239,7 +1268,7 @@ async def send_payment_failed_email(
 ):
     """Notify user that a subscription payment failed and link to billing portal."""
     greeting = f"Hi {first_name}!" if first_name else "Hi there!"
-    frontend_url = os.getenv("FRONTEND_URL", "https://app.archian.ai")
+    frontend_url = os.getenv("FRONTEND_URL", DEFAULT_FRONTEND_URL)
     billing_url = portal_url or f"{frontend_url}/settings"
 
     html_body = f"""
@@ -1296,7 +1325,7 @@ async def send_subscription_lapsed_email(
 ):
     """Notify user their paid subscription ended and they are on the free plan."""
     greeting = f"Hi {first_name}!" if first_name else "Hi there!"
-    frontend_url = os.getenv("FRONTEND_URL", "https://app.archian.ai")
+    frontend_url = os.getenv("FRONTEND_URL", DEFAULT_FRONTEND_URL)
     credit_balance = plan_details.get("credit_balance")
     balance_line = (
         f"Your credit balance is now {int(credit_balance):,} credits."
@@ -1353,7 +1382,7 @@ Resubscribe anytime: {frontend_url}/plans
 
 
 async def send_contact_form_email(form_type: str, form_data: dict):
-    """Send contact form submission email to founders@archian.ai with dynamic form data"""
+    """Send contact form submission email to CONTACT_TO_EMAIL / SUPPORT_EMAIL."""
     
     # Format form type for display
     form_type_display = {
@@ -1502,9 +1531,15 @@ Form Data:
 This email was sent from the Archian AI website contact form
     """
     
+    contact_to = _support_email()
+    if not contact_to:
+        raise ValueError(
+            "CONTACT_TO_EMAIL or SUPPORT_EMAIL must be set to receive contact form submissions"
+        )
+
     payload = {
         "From": SMTP_SENDER,
-        "To": "founders@archian.ai",
+        "To": contact_to,
         "Subject": f"New {form_type_display} Submission from {name}",
         "HtmlBody": html_body,
         "TextBody": text_body,

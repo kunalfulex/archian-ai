@@ -19,6 +19,7 @@ from db.connection import database
 from routes.auth import get_current_user
 from utils.cors_origins import normalize_origin
 from utils.salesforceapimigration import fetch_and_store_salesforce_objects
+from utils.url_defaults import DEFAULT_FRONTEND_URL
 
 router = APIRouter()
 
@@ -45,7 +46,7 @@ code_verifiers = {}
 
 
 # Configure CORS - Secure configuration
-FRONTEND_URL = normalize_origin(os.getenv("FRONTEND_URL", "https://app.archian.ai"))
+FRONTEND_URL = normalize_origin(os.getenv("FRONTEND_URL", DEFAULT_FRONTEND_URL))
 
 
 @router.get("/oauth/start")

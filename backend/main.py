@@ -94,8 +94,10 @@ app = FastAPI()
 load_dotenv()
 
 from utils.cors_origins import (
-    COMBINED_ORIGIN_REGEX,
+    DEFAULT_BACKEND_URL,
+    DEFAULT_FRONTEND_URL,
     get_allowed_origins,
+    get_trusted_hosts,
     is_allowed_cors_origin,
     normalize_origin,
 )
@@ -234,49 +236,40 @@ CLIENT_ID = os.getenv("SALESFORCE_CLIENT_ID")
 
 ALLOWED_ORIGINS = get_allowed_origins()
 
-# Configure CSP - Environment-specific configuration
+# CSP connect-src: self + configured app URLs + known third-party APIs (no product hosts baked in).
+_CSP_VENDOR_CONNECT = (
+    "https://api.openai.com https://api.postmarkapp.com https://api.stripe.com"
+)
+
+
 def get_csp_directives():
-    """Get CSP directives based on environment"""
-    # Get environment from URL or environment variable
-    frontend_url = os.getenv("FRONTEND_URL", "https://app.archian.ai")
-    backend_url = os.getenv("BACKEND_URL", "https://api.archian.ai")
-    
-    # Determine environment based on URLs
+    """Build CSP from FRONTEND_URL / BACKEND_URL (local defaults when unset)."""
+    frontend_url = normalize_origin(os.getenv("FRONTEND_URL", DEFAULT_FRONTEND_URL))
+    backend_url = normalize_origin(os.getenv("BACKEND_URL", DEFAULT_BACKEND_URL))
+    connect_parts = ["'self'", _CSP_VENDOR_CONNECT]
+    if frontend_url:
+        connect_parts.append(frontend_url)
+    if backend_url:
+        connect_parts.append(backend_url)
     if "localhost" in frontend_url or "127.0.0.1" in frontend_url:
-        # Local development
-        connect_src = "'self' https://api.openai.com https://api.postmarkapp.com https://api.stripe.com http://localhost:* https://localhost:*"
-    elif "dev" in frontend_url or "dev" in backend_url:
-        # Development environment
-        connect_src = f"'self' https://api.openai.com https://api.postmarkapp.com https://api.stripe.com {backend_url} {frontend_url}"
-    elif "uat" in frontend_url or "uat" in backend_url:
-        # UAT environment
-        connect_src = f"'self' https://api.openai.com https://api.postmarkapp.com https://api.stripe.com {backend_url} {frontend_url}"
-    else:
-        # Production (archian.ai app + API + marketing origins)
-        connect_src = (
-            "'self' https://api.openai.com https://api.postmarkapp.com https://api.stripe.com "
-            "https://archian.ai https://www.archian.ai https://*.archian.ai "
-            "https://api.archian.ai https://app.archian.ai"
-        )
-    
+        connect_parts.extend(["http://localhost:*", "https://localhost:*"])
     return {
         "default-src": "'self'",
         "script-src": "'self' 'unsafe-inline' 'unsafe-eval'",
         "style-src": "'self' 'unsafe-inline'",
         "img-src": "'self' data: https:",
         "font-src": "'self' data:",
-        "connect-src": connect_src,
-        "frame-ancestors": "'none'"
+        "connect-src": " ".join(connect_parts),
+        "frame-ancestors": "'none'",
     }
 
-# Generate CSP header
+
 CSP_DIRECTIVES = get_csp_directives()
 CSP_HEADER = "; ".join([f"{key} {value}" for key, value in CSP_DIRECTIVES.items()])
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
-    allow_origin_regex=COMBINED_ORIGIN_REGEX,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=[
@@ -291,31 +284,9 @@ app.add_middleware(
     ],
 )
 
-# Add trusted host middleware for additional security
-# Extract host from FRONTEND_URL for dynamic configuration
-frontend_host = os.getenv("FRONTEND_URL", "https://app.archian.ai").replace("https://", "").replace("http://", "").rstrip("/")
-
-# Get backend host from environment or use default
-backend_host = os.getenv("BACKEND_HOST", "edison-ai-dev.onrender.com")
-
 app.add_middleware(
-    TrustedHostMiddleware, 
-    allowed_hosts=[
-        frontend_host,  # Dynamic from FRONTEND_URL
-        backend_host,   # Backend domain
-        "edison-ai-dev.onrender.com",  # Dev backend
-        "edison-ai-uat.onrender.com",  # UAT backend
-        "edisonai-frontend-dev.onrender.com",  # Dev frontend (Host / redirects)
-        "edisonai-frontend-uat.onrender.com",  # UAT frontend
-        "api.archian.ai",   # Production API
-        "app.archian.ai",   # Production frontend (new)
-        "archian.ai",       # Apex
-        "www.archian.ai",   # Marketing / www
-        "*.archian.ai",     # Any archian.ai subdomain (Host header)
-        "localhost",    # Local development
-        "127.0.0.1",    # Local development
-        "0.0.0.0"       # Docker/container development
-    ]
+    TrustedHostMiddleware,
+    allowed_hosts=get_trusted_hosts(),
 )
 
 from middleware.csrf_middleware import CsrfMiddleware

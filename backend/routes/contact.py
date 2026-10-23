@@ -20,8 +20,8 @@ class ContactFormData(BaseModel):
 @router.post("/contact-form")
 async def submit_contact_form(form_data: ContactFormData):
     """
-    Open endpoint to receive form submissions from archian.ai / marketing sites
-    Accepts any form data format and sends everything to email
+    Open endpoint to receive form submissions from a marketing site.
+    Accepts any form data format and emails CONTACT_TO_EMAIL / SUPPORT_EMAIL.
     """
     try:
         # Convert form data to dict
@@ -38,7 +38,6 @@ async def submit_contact_form(form_data: ContactFormData):
         elif "sales" in str(form_dict).lower() or "purchase" in str(form_dict).lower():
             form_type = "sales"
         
-        # Send email to founders@archian.ai with all form data
         await send_contact_form_email(
             form_type=form_type,
             form_data=form_dict
